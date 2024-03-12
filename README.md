@@ -2,3 +2,6 @@
 ### Initial Settings [🔗](https://blu-y.github.io/turtle/)
 
 ## 1. USAR Contest [🔗](./create_engineering/README.md)
+
+
+Intel Realsense D435, L515
