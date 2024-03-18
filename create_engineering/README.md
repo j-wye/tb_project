@@ -1,10 +1,11 @@
 # During Creative Engineering
 ## USAR Contest with using Turtlebot
-- Mission : Turtlebot이 미지의 Map을 자율주행하며 qr code를 인식하고 주어진 갯수만큼 인식했다면 다시 원래 자리로 되돌아와서 정지
+- Mission : In an ***Unknown Environment***, Turtlebot has to drive autonomously until it recognizes a set number of *QR codes*.
 
 - Concepts I used to solve the mission :
     - 1. Detect QR Code
         - Using pyzbar package
+
     - 2. ROS2 Communication
         - 1. CvBridge
             - Converting between ROS images and OpenCV images
@@ -22,4 +23,18 @@
                 Liveliness : 정해진 주기 안에서 노드 혹은 토픽의 생사를 확인
                 ```
         
-        - 3. Twist, Marker, Laserscan, PoseWithCovarianceStamped : ROS2 msg type
+        - 3. create_publisher / create_subscription :
+            - Use various ROS2 msgs (e.g. Twist, Marker, Laserscan, PoseWithCovarianceStamped)
+            - subscribe and publish necessary informations
+        
+        - 4. Calculate position :
+            - Firstly, just calculate distance of detected qr code
+                - Use 2d Lidar for obtain depth value (Because, camera is monocular)
+            - Secondly, calculate exact position of detected qr code
+                - Use Quaternion from current position and orientation and calculated distance to qr code
+        
+        - 5. Display marker point at exact position of detected qr code on RVIZ
+
+        - 6. If completes all given missions, returns to its starting point and stops working.
+
+- Disappointing at Control Logic part...
